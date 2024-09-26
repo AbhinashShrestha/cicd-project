@@ -1,1 +1,1 @@
-The jenkins file helps automated the process of building new images and pushing to a self hosted artifact registry if any change is detected in a git repo and updates the image tag of a yaml file concerned with deployment in k3s cluster via argocd
+The jenkins file helps automated the process of building new images and pushing to a self hosted artifact registry if any change is detected in a git repo and updates the image tag of a yaml file concerned with deployment in k3s cluster which is automated by argocd
