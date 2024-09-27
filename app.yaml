@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: web-app
+  name: finexo
+  labels:
+    app: finexo-website
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: finexo-website
+  template:
+    metadata:
+      labels:
+        app: finexo-website
+    spec:
+      containers:
+      - name: finexo-web-app
+        image: selfhosted.harbor.com:443/library/finexo@sha256:51b26e71dba2faed6d49dbbf24fc65bed1f0fb15c1109ef63a093caa971b4192
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+      - name: regcred
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: finexo-service
+  namespace: web-app
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8888
+      targetPort: 80
+  selector:
+    app: finexo-website
